@@ -1,0 +1,36 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Game"
+config/version="0.1.0"
+run/main_scene="res://Kernel.tscn"
+config/use_custom_user_dir=true
+config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/image="res://BootSplashImage.png"
+boot_splash/fullsize=false
+config/icon="res://ProjectIcon.png"
+config/macos_native_icon="res://MacOSNativeIcon.icns"
+config/windows_native_icon="res://WindowsNativeIcon.ico"
+boot_splash/minimum_display_time=2000
+
+[display]
+
+window/size/mode=4
+
+[dotnet]
+
+project/assembly_name="Game Jam Template Godot"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

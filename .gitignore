@@ -1,0 +1,11 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+.builds
+!.builds/android/.gitkeep
+!.builds/ios/.gitkeep
+!.builds/linux/.gitkeep
+!.builds/mac/.gitkeep
+!.builds/web/.gitkeep
+!.builds/win/.gitkeep
