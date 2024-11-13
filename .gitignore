@@ -2,7 +2,10 @@
 .godot/
 /android/
 
-.builds
+
+
+.builds/*/*
+
 !.builds/android/.gitkeep
 !.builds/ios/.gitkeep
 !.builds/linux/.gitkeep
