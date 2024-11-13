@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctdwujlebrxeh"
-path="res://.godot/imported/BootSplashImage.png-b5373af323441585217aa47ac3a7c26c.ctex"
+path="res://.godot/imported/boot_splash_image.png-544903bef8848c1b254529ce88f0f755.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BootSplashImage.png"
-dest_files=["res://.godot/imported/BootSplashImage.png-b5373af323441585217aa47ac3a7c26c.ctex"]
+source_file="res://boot_splash_image.png"
+dest_files=["res://.godot/imported/boot_splash_image.png-544903bef8848c1b254529ce88f0f755.ctex"]
 
 [params]
 

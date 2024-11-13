@@ -12,14 +12,14 @@ config_version=5
 
 config/name="Game"
 config/version="0.1.0"
-run/main_scene="res://Kernel.tscn"
+run/main_scene="res://kernel.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "GL Compatibility")
-boot_splash/image="res://BootSplashImage.png"
+boot_splash/image="res://boot_splash_image.png"
 boot_splash/fullsize=false
-config/icon="res://ProjectIcon.png"
-config/macos_native_icon="res://MacOSNativeIcon.icns"
-config/windows_native_icon="res://WindowsNativeIcon.ico"
+config/icon="res://project_icon.png"
+config/macos_native_icon="res://mac_os_native_icon.icns"
+config/windows_native_icon="res://windows_native_icon.ico"
 boot_splash/minimum_display_time=2000
 
 [display]
