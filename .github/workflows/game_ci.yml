@@ -48,7 +48,7 @@ jobs:
       contents: write
     steps:
       - name: Install butler
-        run: | 
+        run: |
           mkdir -p /opt/butler/bin
           cd /opt/butler/bin
           wget -O butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
@@ -63,6 +63,7 @@ jobs:
           name: web_build
 
       - name: Upload artifact to itch.io
-        run: | 
+        run: |
           cd $GITHUB_WORKSPACE
-          butler push web.zip $ITCH_USERNAME/$ITCH_GAME:html
+          ls /opt/butler/bin
+          /opt/butler/bin/butler push web.zip $ITCH_USERNAME/$ITCH_GAME:html
