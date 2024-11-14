@@ -65,3 +65,4 @@ jobs:
       - name: Upload artifact to itch.io
         run: | 
           ls ~
+          ls $GITHUB_WORKSPACE
