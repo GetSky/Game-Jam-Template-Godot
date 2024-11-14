@@ -31,11 +31,11 @@ jobs:
         run: |
           godot -v --export-release --headless "Web"
           ls -lha .
-          ls -lha .build/
-          ls -lha .build/web
+          ls -lha .builds/
+          ls -lha .builds/web
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: web-game
-          path: .build/web
+          path: .builds/web
