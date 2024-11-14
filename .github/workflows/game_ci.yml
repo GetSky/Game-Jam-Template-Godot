@@ -2,6 +2,8 @@ name: "Game CI/CD"
 
 env:
   GODOT_VERSION: 4.3
+  ITCH_USERNAME: getskygames
+  ITCH_GAME: game-jam-template-godot
 
 on:
   workflow_dispatch:
@@ -53,16 +55,14 @@ jobs:
           unzip butler.zip
           chmod +x butler
           export PATH=/opt/butler/bin/:$PATH
-          cd ~
           butler -V
 
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: web_build
-          path: ~
 
       - name: Upload artifact to itch.io
         run: | 
-          ls ~
-          ls $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE
+          butler push web.zip $ITCH_USERNAME/$ITCH_GAME:html
