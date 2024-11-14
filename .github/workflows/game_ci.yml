@@ -2,12 +2,15 @@ name: "Game CI/CD"
 
 env:
   GODOT_VERSION: 4.3
+  ITCH_USERNAME: getskygames
+  ITCH_GAME: game-jam-template-godot
+  BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - feat/cd_web
 
 jobs:
   web:
@@ -38,3 +41,30 @@ jobs:
         with:
           name: web_build
           path: web.zip
+
+  release:    
+    needs: [web]
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    steps:
+      - name: Install butler
+        run: |
+          mkdir -p /opt/butler/bin
+          cd /opt/butler/bin
+          wget -O butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          export PATH=/opt/butler/bin/:$PATH
+          butler -V
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: web_build
+
+      - name: Upload artifact to itch.io
+        run: |
+          cd $GITHUB_WORKSPACE
+          ls /opt/butler/bin
+          /opt/butler/bin/butler push web.zip $ITCH_USERNAME/$ITCH_GAME:html
