@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - feat/cd_web
 
 jobs:
   web:
@@ -38,3 +38,20 @@ jobs:
         with:
           name: web_build
           path: web.zip
+
+  release:    
+    needs: [web]
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    steps:
+      - name: Install butler
+        run: | 
+          mkdir -p /opt/butler/bin
+          cd /opt/butler/bin
+          wget -O butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          export PATH=/opt/butler/bin/:$PATH
+          cd ~
+          butler -V
