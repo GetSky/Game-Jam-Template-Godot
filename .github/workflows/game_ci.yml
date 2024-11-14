@@ -4,7 +4,7 @@ env:
   GODOT_VERSION: 4.3
   ITCH_USERNAME: getskygames
   ITCH_GAME: game-jam-template-godot
-  BUTLER_API_KEY: $BUTLER_API_KEY
+  BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 on:
   workflow_dispatch:
