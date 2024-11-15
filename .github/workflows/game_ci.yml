@@ -2,15 +2,15 @@ name: "Game CI/CD"
 
 env:
   GODOT_VERSION: 4.3
-  ITCH_USERNAME: getskygames
-  ITCH_GAME: game-jam-template-godot
+  ITCH_USERNAME: ${{ vars.ITCH_USERNAME }}
+  ITCH_GAME: ${{ vars.ITCH_GAME }}
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - feat/cd_web
+      - refactor/add_env_to_ci
 
 jobs:
   web:
