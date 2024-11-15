@@ -62,15 +62,11 @@ jobs:
       - name: Build
         run: godot -v --export-release --headless "Windows Desktop"
 
-      - name: Zip artifact
-        run: |
-          zip -r ${ITCH_GAME}_win.zip .builds/win
-
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ vars.ITCH_GAME }}_win
-          path: ${{ vars.ITCH_GAME }}_win.zip
+          path: .builds/win/game.exe
 
   release:
     needs: [web]
