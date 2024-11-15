@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - refactor/add_env_to_ci
+      - master
 
 jobs:
   web:
