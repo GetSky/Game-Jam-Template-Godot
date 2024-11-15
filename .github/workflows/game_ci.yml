@@ -2,15 +2,15 @@ name: "Game CI/CD"
 
 env:
   GODOT_VERSION: 4.3
-  ITCH_USERNAME: getskygames
-  ITCH_GAME: game-jam-template-godot
+  GAME_WEB_NAME: web_build
+  ITCH_USERNAME: ${{ vars.ITCH_USERNAME }}
+  ITCH_GAME: ${{ vars.ITCH_GAME }}
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 on:
   workflow_dispatch:
   push:
-    branches:
-      - feat/cd_web
+    branches: [master, main]
 
 jobs:
   web:
@@ -34,15 +34,16 @@ jobs:
         run: godot -v --export-release --headless "Web"
 
       - name: Zip artifact
-        run: zip -r web.zip .builds/web
+        run: |
+          zip -r ${GAME_WEB_NAME}.zip .builds/web
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: web_build
-          path: web.zip
+          name: ${{ env.GAME_WEB_NAME }}
+          path: ${{ env.GAME_WEB_NAME }}.zip
 
-  release:    
+  release:
     needs: [web]
     runs-on: ubuntu-20.04
     permissions:
@@ -55,16 +56,13 @@ jobs:
           wget -O butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
           unzip butler.zip
           chmod +x butler
-          export PATH=/opt/butler/bin/:$PATH
-          butler -V
 
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: web_build
+          name: ${{ env.GAME_WEB_NAME }}
 
       - name: Upload artifact to itch.io
         run: |
           cd $GITHUB_WORKSPACE
-          ls /opt/butler/bin
-          /opt/butler/bin/butler push web.zip $ITCH_USERNAME/$ITCH_GAME:html
+          /opt/butler/bin/butler push ${GAME_WEB_NAME}.zip $ITCH_USERNAME/$ITCH_GAME:html
