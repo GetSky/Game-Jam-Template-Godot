@@ -60,13 +60,15 @@ jobs:
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
 
       - name: Build
-        run: godot -v --export-release --headless "Windows Desktop"
+        run: |
+          godot -v --export-release --headless "Windows Desktop"
+          mv .builds/win/game.exe .builds/win/${{ vars.ITCH_GAME }}.exe
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ vars.ITCH_GAME }}_win
-          path: .builds/win/game.exe
+          path: .builds/win/${{ vars.ITCH_GAME }}.exe
 
   release:
     needs: [web]
