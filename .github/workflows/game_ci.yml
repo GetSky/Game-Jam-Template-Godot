@@ -35,13 +35,15 @@ jobs:
         run: godot -v --export-release --headless "Web"
 
       - name: Zip artifact
-        run: zip -r ${GAME_WEB_NAME}.zip .builds/web
+        run: |
+          zip -r ${GAME_WEB_NAME}.zip .builds/web
+          ls 
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${GAME_WEB_NAME}
-          path: ${GAME_WEB_NAME}.zip
+          name: ${{env.GAME_WEB_NAME}}
+          path: ${{env.GAME_WEB_NAME}}.zip
 
   release:    
     needs: [web]
