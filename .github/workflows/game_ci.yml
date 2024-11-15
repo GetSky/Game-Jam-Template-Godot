@@ -103,4 +103,5 @@ jobs:
       - name: Upload web artifact to itch.io
         run: |
           cd $GITHUB_WORKSPACE
-          /opt/butler/bin/butler push ${ITCH_GAME}_win.zip $ITCH_USERNAME/$ITCH_GAME:windows
+          ls
+          /opt/butler/bin/butler push ${ITCH_GAME}_win.exe $ITCH_USERNAME/$ITCH_GAME:windows
