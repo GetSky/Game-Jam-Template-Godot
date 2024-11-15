@@ -104,4 +104,4 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           ls
-          /opt/butler/bin/butler push ${ITCH_GAME}_win.exe $ITCH_USERNAME/$ITCH_GAME:windows
+          /opt/butler/bin/butler push ${ITCH_GAME}.exe $ITCH_USERNAME/$ITCH_GAME:windows
