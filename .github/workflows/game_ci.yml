@@ -1,6 +1,7 @@
 name: "Game CI/CD"
 
 env:
+  TARGET_OS: ubuntu-20.04
   GODOT_VERSION: 4.3
   GAME_WEB_NAME: web_build
   ITCH_USERNAME: ${{ vars.ITCH_USERNAME }}
@@ -15,7 +16,7 @@ on:
 
 jobs:
   web:
-    runs-on: ubuntu-20.04
+    runs-on: ${{ vars.TARGET_OS }}
     permissions:
       contents: write
     container:
@@ -45,9 +46,9 @@ jobs:
           name: ${{env.GAME_WEB_NAME}}
           path: ${{env.GAME_WEB_NAME}}.zip
 
-  release:    
+  release:
     needs: [web]
-    runs-on: ubuntu-20.04
+    runs-on: ${{ vars.TARGET_OS }}
     permissions:
       contents: write
     steps:
