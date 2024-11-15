@@ -37,7 +37,6 @@ jobs:
       - name: Zip artifact
         run: |
           zip -r ${GAME_WEB_NAME}.zip .builds/web
-          ls 
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
