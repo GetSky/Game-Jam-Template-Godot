@@ -16,7 +16,7 @@ on:
 
 jobs:
   web:
-    runs-on: ${{ vars.TARGET_OS }}
+    runs-on: ${{ env.TARGET_OS }}
     permissions:
       contents: write
     container:
@@ -43,12 +43,12 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{env.GAME_WEB_NAME}}
-          path: ${{env.GAME_WEB_NAME}}.zip
+          name: ${{ env.GAME_WEB_NAME }}
+          path: ${{ env.GAME_WEB_NAME }}.zip
 
   release:
     needs: [web]
-    runs-on: ${{ vars.TARGET_OS }}
+    runs-on: ${{ env.TARGET_OS }}
     permissions:
       contents: write
     steps:
@@ -63,7 +63,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: ${{env.GAME_WEB_NAME}}
+          name: ${{ env.GAME_WEB_NAME }}
 
       - name: Upload artifact to itch.io
         run: |
