@@ -71,7 +71,7 @@ jobs:
           path: .builds/win/${{ vars.ITCH_GAME }}.exe
 
   release:
-    needs: [web]
+    needs: [web, windows]
     runs-on: ubuntu-20.04
     permissions:
       contents: write
@@ -84,12 +84,24 @@ jobs:
           unzip butler.zip
           chmod +x butler
 
-      - name: Download artifact
+      - name: Download web artifact
         uses: actions/download-artifact@v4
         with:
           name: ${{ vars.ITCH_GAME }}_web
 
-      - name: Upload artifact to itch.io
+      - name: Upload web artifact to itch.io
         run: |
           cd $GITHUB_WORKSPACE
           /opt/butler/bin/butler push ${ITCH_GAME}_web.zip $ITCH_USERNAME/$ITCH_GAME:html
+
+
+      - name: Download win artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ vars.ITCH_GAME }}_win
+  
+      - name: Upload web artifact to itch.io
+        run: |
+          cd $GITHUB_WORKSPACE
+          ls
+          /opt/butler/bin/butler push ${ITCH_GAME}.exe $ITCH_USERNAME/$ITCH_GAME:windows
