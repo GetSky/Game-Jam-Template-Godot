@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://cypgf1ngb8f82"]
+
+[ext_resource type="Script" path="res://features/transition_screen/transition_screen.gd" id="1_bcu3p"]
+
+[sub_resource type="Animation" id="Animation_v0cyo"]
+resource_name = "Fade Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.141176, 0.141176, 0.141176, 0), Color(0.141176, 0.141176, 0.141176, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_67dmy"]
+_data = {
+"Fade Out": SubResource("Animation_v0cyo")
+}
+
+[node name="TransitionScreen" type="Control" node_paths=PackedStringArray("background", "animator")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bcu3p")
+background = NodePath("Background")
+animator = NodePath("Animator")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 0)
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Background")
+libraries = {
+"": SubResource("AnimationLibrary_67dmy")
+}
