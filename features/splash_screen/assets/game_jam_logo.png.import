@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctdwujlebrxeh"
-path="res://.godot/imported/boot_splash_image.png-544903bef8848c1b254529ce88f0f755.ctex"
+uid="uid://vhfcn55wsdy2"
+path="res://.godot/imported/game_jam_logo.png-1efa01e84397508d743a7839157df718.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://boot_splash_image.png"
-dest_files=["res://.godot/imported/boot_splash_image.png-544903bef8848c1b254529ce88f0f755.ctex"]
+source_file="res://features/splash_screen/assets/game_jam_logo.png"
+dest_files=["res://.godot/imported/game_jam_logo.png-1efa01e84397508d743a7839157df718.ctex"]
 
 [params]
 
