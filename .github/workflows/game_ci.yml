@@ -89,7 +89,7 @@ jobs:
 
       - name: Build
         run: |
-          godot -v --export-release --headless "Linux/X11"
+          godot -v --export-release --headless "Linux"
           mv .builds/linux/game.x86_64 .builds/linux/${{ vars.ITCH_GAME }}.x86_64
 
       - name: Upload artifact
