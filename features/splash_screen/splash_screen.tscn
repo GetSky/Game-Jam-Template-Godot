@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdmb3uxe0d6"]
+
+[ext_resource type="Script" path="res://features/splash_screen/splash_screen.gd" id="1_cwy8u"]
+[ext_resource type="Texture2D" uid="uid://ctdwujlebrxeh" path="res://features/splash_screen/assets/team_logo.png" id="1_ooewk"]
+[ext_resource type="PackedScene" uid="uid://c4cnynqdfvrr7" path="res://features/main_menu/main_menu.tscn" id="2_awcnu"]
+[ext_resource type="Texture2D" uid="uid://vhfcn55wsdy2" path="res://features/splash_screen/assets/game_jam_logo.png" id="4_7a20l"]
+[ext_resource type="Texture2D" uid="uid://t27mjcdflxog" path="res://features/splash_screen/assets/game_logo.png" id="5_echr4"]
+[ext_resource type="Script" path="res://features/splash_screen/tooltip.gd" id="6_2xphx"]
+
+[node name="SplashScreen" type="Control" node_paths=PackedStringArray("splash_screens_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cwy8u")
+splash_screens_container = NodePath("Splashes")
+load_scene = ExtResource("2_awcnu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="Splashes" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TeamLogo" type="TextureRect" parent="Splashes"]
+layout_mode = 2
+texture = ExtResource("1_ooewk")
+
+[node name="GameJamLogo" type="TextureRect" parent="Splashes"]
+layout_mode = 2
+texture = ExtResource("4_7a20l")
+
+[node name="GameLogo" type="TextureRect" parent="Splashes"]
+layout_mode = 2
+texture = ExtResource("5_echr4")
+
+[node name="Bottom" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Tooltip" type="Label" parent="Bottom"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.886262, 0.886261, 0.886262, 1)
+theme_override_font_sizes/font_size = 24
+text = "Press any key to skip"
+script = ExtResource("6_2xphx")
+time_sec = 0.8
