@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c4cnynqdfvrr7"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 33.0
+offset_right = 79.0
+offset_bottom = 56.0
+text = "Main Menu"
