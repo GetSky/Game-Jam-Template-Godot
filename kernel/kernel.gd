@@ -7,7 +7,6 @@ class_name Kernel extends Node
 
 func _ready() -> void:
 	init()
-	var s = splash_screen.get_script() as SplashScreen
 	ServiceLocator.scene_transition_service.set_next_ui(splash_screen).change()
 
 func init() -> void:
