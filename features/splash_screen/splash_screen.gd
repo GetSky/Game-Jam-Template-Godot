@@ -1,4 +1,4 @@
-extends Control
+class_name SplashScreen extends Control
 
 @export var splash_screens_container : Node
 @export var in_time_sec : float = 0.5
@@ -6,7 +6,8 @@ extends Control
 @export var pause_time_sec : float = 1.5
 @export var fade_out_time_sec : float = 1.5
 @export var out_time_sec : float = 0.5
-@export var load_scene : PackedScene
+@export var load_ui_scene : PackedScene
+@export var load_world_scene : PackedScene
 
 var splash_screens : Array
 var _tween : Tween
@@ -33,7 +34,7 @@ func fade() -> void:
 		
 		await _tween.finished
 	
-	ServiceLocator.scene_transition_service.transit(load_scene.resource_path)
+	ServiceLocator.scene_transition_service.set_next_world(load_world_scene).set_next_ui(load_ui_scene).transit()
 
 func get_screens() -> void:
 	splash_screens = splash_screens_container.get_children()
@@ -43,5 +44,5 @@ func get_screens() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed():
-		ServiceLocator.scene_transition_service.transit(load_scene.resource_path)
+		ServiceLocator.scene_transition_service.set_next_world(load_world_scene).set_next_ui(load_ui_scene).transit()
 		_tween.kill()

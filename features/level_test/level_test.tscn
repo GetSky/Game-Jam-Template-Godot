@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://jrsweemov67v"]
+
+[node name="LevelTest" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(112, 0)
+points = PackedVector2Array(154, 218, 443, 234, 542, 156, 735, 306, 509, 474, 212, 392, 397, 292, 459, 299, 486, 338, 441, 404, 380, 357)
