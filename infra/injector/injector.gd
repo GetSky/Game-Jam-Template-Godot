@@ -1,3 +1,6 @@
+## Code author: TheColorRed
+## Original source: https://github.com/TheColorRed/godot-di/tree/032d213201a87460f64ed3ae98c732ecccb0ad82
+
 ## A class that manages injectables.
 ## Valid injectables include:
 ## * [Injectable] &ndash; A class that extends Injectable.
