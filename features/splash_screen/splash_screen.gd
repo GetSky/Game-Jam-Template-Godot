@@ -9,6 +9,8 @@ class_name SplashScreen extends Control
 @export var load_ui_scene : PackedScene
 @export var load_world_scene : PackedScene
 
+@onready var transition_service: SceneTransitionService = Injector.inject(SceneTransitionService)
+
 var splash_screens : Array
 var _tween : Tween
 
@@ -34,7 +36,7 @@ func fade() -> void:
 		
 		await _tween.finished
 	
-	ServiceLocator.scene_transition_service.set_next_world(load_world_scene).set_next_ui(load_ui_scene).transit()
+	transition_service.set_next_world(load_world_scene).set_next_ui(load_ui_scene).transit()
 
 func get_screens() -> void:
 	splash_screens = splash_screens_container.get_children()
@@ -44,5 +46,5 @@ func get_screens() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed():
-		ServiceLocator.scene_transition_service.set_next_world(load_world_scene).set_next_ui(load_ui_scene).transit()
+		transition_service.set_next_world(load_world_scene).set_next_ui(load_ui_scene).transit()
 		_tween.kill()

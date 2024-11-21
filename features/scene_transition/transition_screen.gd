@@ -1,6 +1,5 @@
-class_name TransitionScreenHandler extends Control
+class_name TransitionScreen extends Control
 
-@export var background : ColorRect
 @export var animator : AnimationPlayer
 @export var execution_time_ms: int = 1000
 

@@ -23,7 +23,7 @@ config/windows_native_icon="res://windows_native_icon.ico"
 
 [autoload]
 
-ServiceLocator="*res://kernel/service_locator.gd"
+Injector="*res://infra/injector/injector.gd"
 
 [display]
 

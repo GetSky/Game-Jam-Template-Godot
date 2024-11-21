@@ -1,16 +1,24 @@
-class_name SceneTransitionService extends Object
+class_name SceneTransitionService extends Injectable
 
 enum CleanType {DELETE, KEEP_RUNNING, REMOVE}
 
-var transition_screen_handler: TransitionScreenHandler
-var world : Node2D
-var ui : Control
+
+var _transition_screen: TransitionScreen
+var _world : Node2D
+var _ui : Control
 
 var _next_ui: PackedScene
 var _next_world: PackedScene
 
 var _current_ui: Control
 var _current_world: Node2D
+
+
+func _init(w: Node2D, u: Control):
+	_world = w
+	_ui = u
+	_transition_screen = preload("transition_screen.tscn").instantiate()
+	u.get_parent().add_child(_transition_screen, true)
 
 
 func set_next_ui(new_ui: PackedScene) -> Object:
@@ -32,25 +40,24 @@ func change(type: CleanType = CleanType.DELETE) -> void:
 
 
 func transit(type: CleanType = CleanType.DELETE) -> void:
-	if transition_screen_handler:
-		await transition_screen_handler.invoke()
+	if _transition_screen:
+		await _transition_screen.invoke()
 	
 	change(type)
-	await transition_screen_handler.get_tree().create_timer(1).timeout
 	
-	if  transition_screen_handler:
-		transition_screen_handler.invoke(true)
+	if  _transition_screen:
+		_transition_screen.invoke(true)
 
 
 func _change_ui(type: CleanType) -> void:
-	_clear(_current_ui, ui, type)
-	_current_ui = _create(_next_ui, ui)
+	_clear(_current_ui, _ui, type)
+	_current_ui = _create(_next_ui, _ui)
 	_next_ui = null
 
 
 func _change_world(type: CleanType) -> void:
-	_clear(_current_world, world, type)
-	_current_world = _create(_next_world, world)
+	_clear(_current_world, _world, type)
+	_current_world = _create(_next_world, _world)
 	_next_world = null
 
 
