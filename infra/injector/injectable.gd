@@ -1,3 +1,6 @@
+## Code author: TheColorRed
+## Original source: https://github.com/TheColorRed/godot-di/tree/032d213201a87460f64ed3ae98c732ecccb0ad82
+
 ## The base class for all injectable classes.
 ## To clean up an injectable, add [_destroy()] to the class.
 class_name Injectable extends Resource
