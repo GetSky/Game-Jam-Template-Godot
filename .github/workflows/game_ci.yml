@@ -97,10 +97,38 @@ jobs:
         with:
           name: ${{ vars.ITCH_GAME }}_linux_x86_64
           path: .builds/linux/${{ vars.ITCH_GAME }}.x86_64
+
+  mac:
+    runs-on: ubuntu-20.04    
+    permissions:
+      contents: write
+    container:
+      image: barichello/godot-ci:4.3
+    steps:
+      - name: Check
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Build
+        run: |
+          godot -v --export-release --headless "macOS"
+          mv .builds/mac/game.zip .builds/mac/${{ vars.ITCH_GAME }}.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ vars.ITCH_GAME }}_macOS
+          path: .builds/mac/${{ vars.ITCH_GAME }}.zip
         
 
   release:
-    needs: [web, windows, linux]
+    needs: [web, windows, linux, mac]
     runs-on: ubuntu-20.04
     permissions:
       contents: write
@@ -127,7 +155,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ vars.ITCH_GAME }}_win
-  
+
       - name: Upload win artifact to itch.io
         run: |
           cd $GITHUB_WORKSPACE
@@ -138,9 +166,20 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ vars.ITCH_GAME }}_linux_x86_64
-  
+
       - name: Upload linux artifact to itch.io
         run: |
           cd $GITHUB_WORKSPACE
           ls
           /opt/butler/bin/butler push ${ITCH_GAME}.x86_64 $ITCH_USERNAME/$ITCH_GAME:linux
+
+      - name: Download mac artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ vars.ITCH_GAME }}_macOS
+
+      - name: Upload mac artifact to itch.io
+        run: |
+          cd $GITHUB_WORKSPACE
+          ls
+          /opt/butler/bin/butler push ${ITCH_GAME}.zip $ITCH_USERNAME/$ITCH_GAME:mac
