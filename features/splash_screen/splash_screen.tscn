@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdmb3uxe0d6"]
+[gd_scene load_steps=9 format=3 uid="uid://cdmb3uxe0d6"]
 
 [ext_resource type="Script" path="res://features/splash_screen/splash_screen.gd" id="1_cwy8u"]
 [ext_resource type="Texture2D" uid="uid://ctdwujlebrxeh" path="res://features/splash_screen/assets/team_logo.png" id="1_ooewk"]
@@ -7,8 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://vhfcn55wsdy2" path="res://features/splash_screen/assets/game_jam_logo.png" id="4_7a20l"]
 [ext_resource type="Texture2D" uid="uid://t27mjcdflxog" path="res://features/splash_screen/assets/game_logo.png" id="5_echr4"]
 [ext_resource type="Script" path="res://features/splash_screen/tooltip.gd" id="6_2xphx"]
+[ext_resource type="AudioStream" uid="uid://bjpoe201y7rux" path="res://features/splash_screen/assets/audio/show.wav" id="8_qwsiy"]
 
-[node name="SplashScreen" type="Control" node_paths=PackedStringArray("splash_screens_container")]
+[node name="SplashScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +17,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cwy8u")
-splash_screens_container = NodePath("Splashes")
 load_ui_scene = ExtResource("2_awcnu")
 load_world_scene = ExtResource("3_i2njb")
 
@@ -66,3 +66,8 @@ theme_override_font_sizes/font_size = 24
 text = "Press any key to skip"
 script = ExtResource("6_2xphx")
 time_sec = 0.8
+
+[node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_qwsiy")
+volume_db = -36.0
+bus = &"SFX"
