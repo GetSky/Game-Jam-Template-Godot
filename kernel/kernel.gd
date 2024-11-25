@@ -10,5 +10,12 @@ class_name Kernel extends Node
 	[world, ui],
 	)
 
+@onready var bms: BackgroundMusicService = Injector.provide(
+	BackgroundMusicService, 
+	"root", 
+	[self],
+	)
+
 func _ready() -> void:
 	sts.set_next_ui(splash_screen).change()
+	bms.play(bms.MusicType.SPLASH)
