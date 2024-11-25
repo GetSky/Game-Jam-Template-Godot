@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://da25cf8xo2hbc"]
+
+[ext_resource type="AudioStream" uid="uid://bp7eyfp1kgru1" path="res://features/background_music/assets/audio/tests/test_0.ogg" id="1_tjuas"]
+[ext_resource type="AudioStream" uid="uid://b001yx0hdrclm" path="res://features/background_music/assets/audio/tests/test_1.ogg" id="2_4cila"]
+[ext_resource type="AudioStream" uid="uid://vp8nuodiajw1" path="res://features/background_music/assets/audio/tests/test_2.ogg" id="3_y7pn4"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_psift"]
+shuffle = true
+fade_time = 1.0
+stream_count = 2
+stream_0 = ExtResource("2_4cila")
+stream_1 = ExtResource("3_y7pn4")
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_0yxlq"]
+clip_count = 2
+clip_0/name = &"SPLASH"
+clip_0/stream = ExtResource("1_tjuas")
+clip_0/auto_advance = 0
+clip_1/name = &"MAIN"
+clip_1/stream = SubResource("AudioStreamPlaylist_psift")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 4,
+"fade_mode": 3,
+"from_time": 2,
+"to_time": 0
+},
+Vector2i(-1, 0): {
+"fade_beats": 1,
+"fade_mode": 1,
+"from_time": 0,
+"to_time": 0
+}
+}
+
+[node name="BackgroundMusic" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamInteractive_0yxlq")
+bus = &"Music"
