@@ -1,6 +1,11 @@
-[gd_scene format=3 uid="uid://jrsweemov67v"]
+[gd_scene load_steps=3 format=3 uid="uid://jrsweemov67v"]
+
+[ext_resource type="Script" path="res://features/level_test/level_test.gd" id="1_uix37"]
+[ext_resource type="PackedScene" uid="uid://bahrc0y5258qb" path="res://features/pause_menu/pause_menu.tscn" id="2_kx6hc"]
 
 [node name="LevelTest" type="Node2D"]
+script = ExtResource("1_uix37")
+pause = ExtResource("2_kx6hc")
 
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2(112, 0)
