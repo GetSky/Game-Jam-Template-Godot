@@ -7,6 +7,8 @@ var _transition_screen: TransitionScreen
 var _world : Node2D
 var _ui : Control
 
+var _last_ui: PackedScene
+var _last_world: PackedScene
 var _next_ui: PackedScene
 var _next_world: PackedScene
 
@@ -21,21 +23,21 @@ func _init(w: Node2D, u: Control):
 	u.get_parent().add_child(_transition_screen, true)
 
 
-func set_next_ui(new_ui: PackedScene) -> Object:
+func set_next_ui(new_ui: PackedScene) -> SceneTransitionService:
 	_next_ui = new_ui
 	return self
 
 
-func set_next_world(new_world: PackedScene) -> Object:
+func set_next_world(new_world: PackedScene) -> SceneTransitionService:
 	_next_world = new_world
 	return self
 
 
 func change(type: CleanType = CleanType.DELETE) -> void:
-	if _isEqual(_current_ui, _next_ui) == false:
+	if _isEqual(_last_ui, _next_ui) == false:
 		_change_ui(type)
 		
-	if _isEqual(_current_world, _next_world) == false:
+	if _isEqual(_last_world, _next_world) == false:
 		_change_world(type)
 
 
@@ -52,13 +54,13 @@ func transit(type: CleanType = CleanType.DELETE) -> void:
 func _change_ui(type: CleanType) -> void:
 	_clear(_current_ui, _ui, type)
 	_current_ui = _create(_next_ui, _ui)
-	_next_ui = null
+	_last_ui = _next_ui
 
 
 func _change_world(type: CleanType) -> void:
 	_clear(_current_world, _world, type)
 	_current_world = _create(_next_world, _world)
-	_next_world = null
+	_last_world = _next_world
 
 
 func _clear(target: Node, root: Node, type: CleanType) -> void:
@@ -84,9 +86,9 @@ func _create(scene: PackedScene, to: Node) -> Node:
 	return new
 
 
-func _isEqual(a, b):
-	if (a != null && a.get_script()!=null && b != null && b.get_script()!=null):
-		if (a.get_script().resource_path == b.get_script().resource_path):
-			return true
-		
-	return false	
+func _isEqual(a: PackedScene, b: PackedScene):
+	if (a != null && b != null):
+		return a.resource_scene_unique_id == b.resource_scene_unique_id
+	if (a == null && b == null):
+		return true
+	return false
