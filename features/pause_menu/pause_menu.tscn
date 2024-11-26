@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bahrc0y5258qb"]
+
+[ext_resource type="Shader" path="res://features/pause_menu/assets/shaders/blur.gdshader" id="1_slpdt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48eyu"]
+shader = ExtResource("1_slpdt")
+shader_parameter/amount = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ugy3"]
+shader = ExtResource("1_slpdt")
+shader_parameter/amount = 1.0
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_h2pw7"]
+
+[node name="PauseMenu" type="Control"]
+material = SubResource("ShaderMaterial_48eyu")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_8ugy3")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("Texture2DRD_h2pw7")
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.458824)
