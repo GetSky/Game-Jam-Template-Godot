@@ -14,7 +14,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Pause"):
 		if _paused == true:
-			scene_service.set_next_ui(null).change()
+			scene_service.set_next_ui(null).change(scene_service.CleanType.KEEP_RUNNING)
 		else:
 			scene_service.set_next_ui(pause).change()
 		_paused = !_paused
