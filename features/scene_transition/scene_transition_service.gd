@@ -15,6 +15,8 @@ var _next_world: PackedScene
 var _current_ui: Control
 var _current_world: Node2D
 
+var _live_scenes = {}
+
 
 func _init(w: Node2D, u: Control):
 	_world = w
@@ -69,6 +71,7 @@ func _clear(target: Node, root: Node, type: CleanType) -> void:
 
 	match type:
 		CleanType.DELETE:
+			_live_scenes.erase(_live_scenes.find_key(target))
 			target.queue_free()
 
 		CleanType.KEEP_RUNNING:
@@ -79,10 +82,18 @@ func _clear(target: Node, root: Node, type: CleanType) -> void:
 
 
 func _create(scene: PackedScene, to: Node) -> Node:
+	if scene == null:
+		return null
+	
 	var new = null
-	if scene != null:
+	if _live_scenes.has(scene):
+		_live_scenes[scene].visible = true
+		new = _live_scenes[scene] 
+	else:
 		new = scene.instantiate()
 		to.add_child(new)
+		_live_scenes[scene] = new
+	
 	return new
 
 
