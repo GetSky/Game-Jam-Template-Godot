@@ -15,14 +15,14 @@ var _next_world: PackedScene
 var _current_ui: Control
 var _current_world: Node2D
 
-var _keep_scenes = {}
+var _keep_scenes : Dictionary = {}
 
 
-func _init(w: Node2D, u: Control):
-	_world = w
-	_ui = u
+func _init(root: Node, world: Node2D, ui: Control):
+	_world = world
+	_ui = ui
 	_transition_screen = preload("transition_screen.tscn").instantiate()
-	u.get_parent().add_child(_transition_screen, true)
+	root.add_child(_transition_screen, true)
 
 
 func set_next_ui(new_ui: PackedScene) -> SceneTransitionService:
@@ -73,10 +73,10 @@ func _clear(target: Node, root: Node, type: CleanType) -> void:
 		CleanType.DELETE:
 			_keep_scenes.erase(_keep_scenes.find_key(target))
 			target.queue_free()
-
+		
 		CleanType.KEEP_RUNNING:
 			target.visible = false
-			
+		
 		CleanType.REMOVE:
 			root.remove_child(target)
 

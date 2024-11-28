@@ -7,7 +7,7 @@ class_name Kernel extends Node
 @onready var sts: SceneTransitionService = Injector.provide(
 	SceneTransitionService, 
 	"root", 
-	[world, ui],
+	[self, world, ui],
 	)
 
 @onready var bms: BackgroundMusicService = Injector.provide(
