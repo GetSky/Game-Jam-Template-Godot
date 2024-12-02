@@ -1,0 +1,1 @@
+class_name UITransitionService extends SceneTransitionService

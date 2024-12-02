@@ -3,7 +3,7 @@ extends Node2D
 @export var pause: PackedScene
 
 @onready var music_service: BackgroundMusicService = Injector.inject(BackgroundMusicService)
-@onready var scene_service: SceneTransitionService = Injector.inject(SceneTransitionService)
+@onready var scene_service: UITransitionService = Injector.inject(UITransitionService)
 
 var _paused : bool
 
@@ -14,7 +14,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Pause"):
 		if _paused == true:
-			scene_service.set_next_ui(null, scene_service.CleanType.REMOVE).change()
+			scene_service.set_next(null, scene_service.CleanType.REMOVE).change()
 		else:
-			scene_service.set_next_ui(pause).change()
+			scene_service.set_next(pause).change()
 		_paused = !_paused

@@ -4,10 +4,16 @@ class_name Kernel extends Node
 @export var ui : Control
 @export var splash_screen : PackedScene
 
-@onready var sts: SceneTransitionService = Injector.provide(
-	SceneTransitionService, 
+@onready var uits: UITransitionService = Injector.provide(
+	UITransitionService, 
 	"root", 
-	[self, world, ui],
+	[self, ui],
+	)
+
+@onready var wts: WorldTransitionService = Injector.provide(
+	WorldTransitionService, 
+	"root", 
+	[self, world],
 	)
 
 @onready var bms: BackgroundMusicService = Injector.provide(
@@ -17,5 +23,5 @@ class_name Kernel extends Node
 	)
 
 func _ready() -> void:
-	sts.set_next_ui(splash_screen).change()
+	uits.set_next(splash_screen).change()
 	bms.play(bms.MusicType.SPLASH)
