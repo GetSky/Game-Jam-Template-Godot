@@ -54,6 +54,6 @@ func _get_screens() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed():
-		world_service.set_next(load_world_scene).transit()
-		ui_service.set_next(load_ui_scene).transit()
+		world_service.transit(load_world_scene)
+		ui_service.transit(load_ui_scene)
 		_tween.kill()
