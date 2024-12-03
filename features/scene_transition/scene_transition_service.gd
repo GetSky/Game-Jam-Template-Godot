@@ -16,10 +16,9 @@ var _current_prefinished = false
 var _keep_scenes : Dictionary = {}
 
 
-func _init(root: Node, container: Node):
+func _init(container: Node, transition_screen: TransitionScreen = null):
 	_container = container
-	_transition_screen = preload("transition_screen.tscn").instantiate()
-	root.add_child(_transition_screen, true)
+	_transition_screen = transition_screen
 
 func set_next(new: PackedScene, type: CleanType = CleanType.DELETE) -> SceneTransitionService:
 	_next = new

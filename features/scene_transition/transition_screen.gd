@@ -13,9 +13,10 @@ func _ready() -> void:
 
 
 func invoke(is_backward: bool = false) -> void:
-	if is_backward == false:
-		animator.play("Fade Out", -1.0, _speed)
-	else:
-		animator.play("Fade Out", -1.0, -_speed, true)
+	if animator.is_playing() == false:
+		if is_backward == false:
+			animator.play("Fade Out", -1.0, _speed)
+		else:
+			animator.play("Fade Out", -1.0, -_speed, true)
 	
 	await animator.animation_finished
