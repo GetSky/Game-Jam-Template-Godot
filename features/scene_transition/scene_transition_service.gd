@@ -20,12 +20,11 @@ func _init(container: Node, transition_screen: TransitionScreen = null):
 	_container = container
 	_transition_screen = transition_screen
 
-func set_next(new: PackedScene, type: CleanType = CleanType.DELETE) -> SceneTransitionService:
+
+func change(new: PackedScene, type: CleanType = CleanType.DELETE) -> void:
 	_next = new
 	_type = type
-	return self
 
-func change() -> void:
 	if _isEqual(_last, _next):
 		return
 	
@@ -34,11 +33,11 @@ func change() -> void:
 	_last = _next
 
 
-func transit() -> void:
+func transit(new: PackedScene, type: CleanType = CleanType.DELETE) -> void:
 	if _transition_screen:
 		await _transition_screen.invoke()
 	
-	change()
+	change(new, type)
 	
 	if  _transition_screen:
 		_transition_screen.invoke(true)

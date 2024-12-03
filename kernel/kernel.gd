@@ -24,5 +24,5 @@ class_name Kernel extends Node
 	)
 
 func _ready() -> void:
-	uits.set_next(splash_screen).change()
+	uits.change(splash_screen)
 	bms.play(bms.MusicType.SPLASH)
