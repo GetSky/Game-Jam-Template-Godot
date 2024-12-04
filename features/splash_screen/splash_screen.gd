@@ -11,8 +11,7 @@ class_name SplashScreen extends Control
 @onready var sound = $BackgroundSound
 @onready var splash_screens_container = $Splashes
 
-@onready var ui_service: UITransitionService = Injector.inject(UITransitionService)
-@onready var world_service: WorldTransitionService = Injector.inject(WorldTransitionService)
+@onready var transit = Injector.inject(TransitIntoWorldCommand)
 
 var splash_screens : Array
 var _tween : Tween
@@ -42,8 +41,7 @@ func fade() -> void:
 		
 		await _tween.finished
 	
-	world_service.set_next(load_world_scene).transit()
-	ui_service.set_next(load_ui_scene).transit()
+	transit.invoke(load_world_scene, load_ui_scene)
 
 
 func _get_screens() -> void:
@@ -54,6 +52,5 @@ func _get_screens() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed():
-		world_service.transit(load_world_scene)
-		ui_service.transit(load_ui_scene)
+		transit.invoke(load_world_scene, load_ui_scene)
 		_tween.kill()
