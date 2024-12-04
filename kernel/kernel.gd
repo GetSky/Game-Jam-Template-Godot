@@ -7,13 +7,13 @@ class_name Kernel extends Node
 
 @onready var uits: UITransitionService = Injector.provide(
 	UITransitionService, 
-	"root", 
+	self, 
 	[ui, transition_screen],
 	)
 
 @onready var wts: WorldTransitionService = Injector.provide(
 	WorldTransitionService, 
-	"root", 
+	self, 
 	[world, transition_screen],
 	)
 
@@ -23,6 +23,10 @@ class_name Kernel extends Node
 	[self],
 	)
 
+@onready var ouic = Injector.provide(OpenUICommand, "root", [uits])
+@onready var suic = Injector.provide(SwitchUICommand, "root", [uits])
+@onready var owuic = Injector.provide(TransitIntoWorldCommand, "root", [wts, uits])
+
 func _ready() -> void:
-	uits.change(splash_screen)
+	ouic.invoke(splash_screen)
 	bms.play(bms.MusicType.SPLASH)
