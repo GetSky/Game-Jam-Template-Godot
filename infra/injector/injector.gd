@@ -18,7 +18,7 @@ var nodes_with_injectables: Array = []
 ## * [type] &ndash; is the injectable class to provide. This can be an instance of Injectable or InjectionToken.
 ## * [source] &ndash; is the node to add the provider data to. This usually is set to [self] but can be any node.
 ## * [parameters] &ndash; is an array of parameters to pass to the Injectable's constructor. If the [type] is an InjectionToken, this is the value to inject, such as a [Node], [String], [Int], etc.
-func provide(type: Variant, source: Variant='root', parameters: Variant=null) -> Variant:
+func provide(type: Variant, source: Variant='root', parameters: Variant=[]) -> Variant:
 	var klass: Variant
 
 	# When we add a new provider, we will set up a signal to clear the injectables when the scene is exited if one doesn't already exist.
@@ -246,7 +246,7 @@ func _on_tree_exiting():
 ## * [type] &ndash; is the injectable class to create. This can be an instance of Injectable or InjectionToken.
 ## * [source] &ndash; is the node to add the provider data to. This usually is set to [self] but can be any node.
 ## * [parameters] &ndash; is an array of parameters to pass to the Injectable's constructor. If the [type] is an InjectionToken, this is the value to inject, such as a [Node], [String], [Int], etc.
-func _create_injectable(type: Variant, source: Node, parameters: Variant=null) -> Injectable:
+func _create_injectable(type: Variant, source: Node, parameters: Variant=[]) -> Injectable:
 	if not parameters is Array and parameters != null:
 		parameters = [parameters]
 
