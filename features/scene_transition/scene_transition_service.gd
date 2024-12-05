@@ -86,7 +86,7 @@ func _create(scene: PackedScene, to: Node) -> Node:
 
 func _isEqual(a: PackedScene, b: PackedScene):
 	if (a != null && b != null):
-		return a.resource_scene_unique_id == b.resource_scene_unique_id
+		return a.resource_path == b.resource_path
 	if (a == null && b == null):
 		return true
 	return false
