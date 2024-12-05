@@ -5,28 +5,23 @@ class_name Kernel extends Node
 @export var splash_screen : PackedScene
 @export var transition_screen: TransitionScreen
 
-@onready var uits: UITransitionService = Injector.provide(
-	UITransitionService, 
-	self, 
-	[ui, transition_screen],
-	)
-
-@onready var wts: WorldTransitionService = Injector.provide(
-	WorldTransitionService, 
-	self, 
-	[world, transition_screen],
-	)
-
-@onready var bms: BackgroundMusicService = Injector.provide(
-	BackgroundMusicService, 
-	"root", 
-	[self],
-	)
-
-@onready var ouic = Injector.provide(OpenUICommand, "root", [uits])
-@onready var suic = Injector.provide(SwitchUICommand, "root", [uits])
-@onready var owuic = Injector.provide(TransitIntoWorldCommand, "root", [wts, uits])
+var _bms : BackgroundMusicService
+var _open_ui : OpenUICommand
 
 func _ready() -> void:
-	ouic.invoke(splash_screen)
-	bms.play(bms.MusicType.SPLASH)
+	_init()
+	_run()
+
+func _init() -> void:
+	_bms = Injector.provide(BackgroundMusicService, "root", [self])
+
+	var uits = Injector.provide(UITransitionService, self, [ui, transition_screen])
+	var wts = Injector.provide(WorldTransitionService, self, [world, transition_screen])
+
+	_open_ui = Injector.provide(OpenUICommand, "root", [uits])
+	Injector.provide(SwitchUICommand, "root", [uits])
+	Injector.provide(TransitIntoWorldCommand, "root", [wts, uits])
+
+func _run()-> void:
+	_open_ui.invoke(splash_screen)
+	_bms.play(_bms.MusicType.SPLASH)
