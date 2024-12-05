@@ -35,12 +35,12 @@ func change(new: PackedScene, type: CleanType = CleanType.DELETE) -> void:
 
 func transit(new: PackedScene, type: CleanType = CleanType.DELETE) -> void:
 	if _transition_screen:
-		await _transition_screen.invoke()
+		await _transition_screen.play(false)
 	
 	change(new, type)
 	
 	if  _transition_screen:
-		_transition_screen.invoke(true)
+		_transition_screen.play(true)
 
 
 func finish_pre_hide(scene: Node) -> void:
