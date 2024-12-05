@@ -11,7 +11,6 @@ var _next : PackedScene
 var _type : CleanType
 
 var _current: Node
-var _current_prefinished = false
 
 var _keep_scenes : Dictionary = {}
 
@@ -43,16 +42,9 @@ func transit(new: PackedScene, type: CleanType = CleanType.DELETE) -> void:
 		_transition_screen.play(true)
 
 
-func finish_pre_hide(scene: Node) -> void:
-	if scene == _current:
-		_current_prefinished = true
-
-
 func _clear(target: Node, root: Node, type: CleanType) -> void:
 	if target == null: 
 		return
-
-	# target.pre_hide(self.finish_pre_hide)
 
 	match type:
 		CleanType.DELETE:
@@ -84,7 +76,7 @@ func _create(scene: PackedScene, to: Node) -> Node:
 	return new
 
 
-func _isEqual(a: PackedScene, b: PackedScene):
+func _isEqual(a: PackedScene, b: PackedScene) -> bool:
 	if (a != null && b != null):
 		return a.resource_path == b.resource_path
 	if (a == null && b == null):
