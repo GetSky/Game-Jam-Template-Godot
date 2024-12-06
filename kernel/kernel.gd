@@ -3,7 +3,7 @@ class_name Kernel extends Node
 @export var world : Node2D
 @export var ui : Control
 @export var splash_screen : PackedScene
-@export var curtain: Curtain
+@export var curtain_view: Curtain
 
 var _bms : BackgroundMusicService
 var _open_ui : OpenUICommand
@@ -14,13 +14,14 @@ func _ready() -> void:
 
 func _resolve_dependencies() -> void:
 	_bms = Injector.provide(BackgroundMusicService, "root", [self])
-
+	var cs = Injector.provide(CurtainService, "root", [curtain_view])
+	
 	var uits = Injector.provide(UITransitionService, "root", [ui])
 	var wts = Injector.provide(WorldTransitionService, "root", [world])
 
 	_open_ui = Injector.provide(OpenUICommand, "root", [uits])
 	Injector.provide(SwitchUICommand, "root", [uits])
-	Injector.provide(TransitIntoWorldCommand, "root", [wts, uits, curtain])
+	Injector.provide(TransitIntoWorldCommand, "root", [wts, uits, cs])
 
 func _run()-> void:
 	_open_ui.invoke(splash_screen)
