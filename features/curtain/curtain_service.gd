@@ -8,5 +8,5 @@ func _init(curtain: Curtain):
 func drop() -> void:
 	await _curtain.play(false)
 
-func hide() -> void:
+func raise() -> void:
 	await _curtain.play(true)
