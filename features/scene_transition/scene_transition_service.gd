@@ -3,7 +3,6 @@ class_name SceneTransitionService extends Injectable
 enum CleanType {DELETE, KEEP_RUNNING, REMOVE}
 
 
-var _transition_screen: TransitionScreen
 var _container : Node
 
 var _last : PackedScene
@@ -15,9 +14,8 @@ var _current: Node
 var _keep_scenes : Dictionary = {}
 
 
-func _init(container: Node, transition_screen: TransitionScreen = null):
+func _init(container: Node):
 	_container = container
-	_transition_screen = transition_screen
 
 
 func change(new: PackedScene, type: CleanType = CleanType.DELETE) -> void:
@@ -30,16 +28,6 @@ func change(new: PackedScene, type: CleanType = CleanType.DELETE) -> void:
 	_clear(_current, _container, _type)
 	_current = _create(_next, _container)
 	_last = _next
-
-
-func transit(new: PackedScene, type: CleanType = CleanType.DELETE) -> void:
-	if _transition_screen:
-		await _transition_screen.play(false)
-	
-	change(new, type)
-	
-	if  _transition_screen:
-		_transition_screen.play(true)
 
 
 func _clear(target: Node, root: Node, type: CleanType) -> void:

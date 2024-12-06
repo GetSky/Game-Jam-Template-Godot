@@ -1,4 +1,4 @@
-class_name TransitionScreen extends Control
+class_name Curtain extends Control
 
 @export var animator : AnimationPlayer
 @export var animation_name : String = "Fade Out"

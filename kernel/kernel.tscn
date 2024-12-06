@@ -2,14 +2,13 @@
 
 [ext_resource type="Script" path="res://kernel/kernel.gd" id="1_qupto"]
 [ext_resource type="PackedScene" uid="uid://cdmb3uxe0d6" path="res://features/splash_screen/splash_screen.tscn" id="2_60hcg"]
-[ext_resource type="PackedScene" uid="uid://cypgf1ngb8f82" path="res://features/scene_transition/transition_screen.tscn" id="3_lq06w"]
+[ext_resource type="PackedScene" uid="uid://cypgf1ngb8f82" path="res://features/curtain/curtain.tscn" id="3_lq06w"]
 
-[node name="Kernel" type="Node" node_paths=PackedStringArray("world", "ui", "transition_screen")]
+[node name="Kernel" type="Node" node_paths=PackedStringArray("world", "ui")]
 script = ExtResource("1_qupto")
 world = NodePath("GameWorld")
 ui = NodePath("UI")
 splash_screen = ExtResource("2_60hcg")
-transition_screen = NodePath("TransitionScreen")
 
 [node name="GameWorld" type="Node2D" parent="."]
 
