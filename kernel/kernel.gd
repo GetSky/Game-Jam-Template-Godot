@@ -9,10 +9,10 @@ var _bms : BackgroundMusicService
 var _open_ui : OpenUICommand
 
 func _ready() -> void:
-	_init()
+	_resolve_dependencies()
 	_run()
 
-func _init() -> void:
+func _resolve_dependencies() -> void:
 	_bms = Injector.provide(BackgroundMusicService, "root", [self])
 
 	var uits = Injector.provide(UITransitionService, "root", [ui])
