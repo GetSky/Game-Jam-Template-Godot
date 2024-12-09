@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://jrsweemov67v"]
 
-[ext_resource type="Script" path="res://features/level_test/level_test.gd" id="1_uix37"]
+[ext_resource type="Script" path="res://levels/level_test/level_test.gd" id="1_uix37"]
 [ext_resource type="PackedScene" uid="uid://bahrc0y5258qb" path="res://features/pause_menu/pause_menu.tscn" id="2_kx6hc"]
-[ext_resource type="PackedScene" uid="uid://bbv26b0tjhmsp" path="res://features/level_test/level_test_2.tscn" id="3_t8mw4"]
+[ext_resource type="PackedScene" uid="uid://bbv26b0tjhmsp" path="res://levels/level_test/level_test_2.tscn" id="3_t8mw4"]
 
 [node name="LevelTest" type="Node2D"]
 script = ExtResource("1_uix37")
